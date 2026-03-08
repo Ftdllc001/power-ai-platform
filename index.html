@@ -1,2 +1,2153 @@
-https://dede3phc22dgx.cloudfront.net/creao2/d486a7a3-59e8-44f4-b398-73bdb784c578/b881e360-9041-70b0-90f0-951c91477069/16d97f0c-156b-4304-ba36-0a731457c5ec/index-complete.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperAgent - AI Productivity Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f9fafb;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Colorful Header */
+        .header {
+            background: white;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #667eea) 1;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .credits-display {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .credits-display.healthy {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .credits-display.warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .credits-display.critical {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #f3f4ff;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 2px solid;
+            border-image: linear-gradient(180deg, #667eea, #f093fb) 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            color: #1f2937;
+            margin-bottom: 16px;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .history-item {
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .history-item:hover {
+            background: #f3f4ff;
+            border-left-color: #667eea;
+        }
+
+        .history-item .title {
+            font-weight: 600;
+            color: #1f2937;
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+
+        .history-item .date {
+            font-size: 0.75em;
+            color: #6b7280;
+        }
+
+        .new-project-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .new-project-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Workspace */
+        .workspace {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .welcome-screen h1 {
+            font-size: 3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .welcome-screen p {
+            font-size: 1.3em;
+            color: #6b7280;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .welcome-screen .highlight {
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        /* Chat Interface */
+        .chat-container {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .chat-container.active {
+            display: flex;
+        }
+
+        .messages-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .message.assistant .message-avatar {
+            background: #f3f4f6;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            line-height: 1.6;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message.assistant .message-content {
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+
+        /* Thinking Indicator */
+        .thinking {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            max-width: fit-content;
+        }
+
+        .thinking.active {
+            display: flex;
+        }
+
+        .thinking-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .thinking-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #667eea;
+            animation: thinkingDot 1.4s ease-in-out infinite;
+        }
+
+        .thinking-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .thinking-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes thinkingDot {
+            0%, 60%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            30% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Input Area */
+        .input-area {
+            padding: 20px 24px;
+            border-top: 2px solid #f3f4f6;
+            background: white;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .input-field {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .send-btn {
+            padding: 14px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .send-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Project Output */
+        .project-output {
+            display: none;
+            padding: 24px;
+            border-top: 2px solid #f3f4f6;
+            background: #fafbfc;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .project-output.active {
+            display: block;
+        }
+
+        .output-header {
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .output-content {
+            background: #1f2937;
+            color: #d1d5db;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+
+        .plan-card {
+            padding: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .plan-card:hover {
+            border-color: #667eea;
+            background: #f9fafb;
+        }
+
+        .plan-card.selected {
+            border-color: #667eea;
+            background: #f3f4ff;
+        }
+
+        .plan-name {
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 1.1em;
+            margin-bottom: 4px;
+        }
+
+        .plan-price {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 1.3em;
+            margin-bottom: 8px;
+        }
+
+        .plan-credits {
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .modal-actions button {
+            flex: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .welcome-screen h1 {
+                font-size: 2em;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+        }
+    </style>
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">⚡ SuperAgent</div>
+        <div class="header-actions">
+            <div class="credits-display healthy" id="creditsDisplay">
+                💳 <span id="creditsCount">100</span> Credits
+            </div>
+            <button class="btn btn-secondary" onclick="showPricing()">Upgrade</button>
+            <button class="btn btn-primary" onclick="showAccount()">Account</button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <button class="new-project-btn" onclick="startNewProject()">➕ New Project</button>
+
+            <h3>Recent Projects</h3>
+            <div id="historyList">
+                <!-- History items will be added here -->
+            </div>
+        </div>
+
+        <!-- Workspace -->
+        <div class="workspace">
+            <!-- Welcome Screen -->
+            <div class="welcome-screen" id="welcomeScreen">
+                <h1>Welcome to SuperAgent</h1>
+                <p>
+                    Build <span class="highlight">any project you want</span> by describing it in a few words.
+                    Our AI will handle the rest!
+                </p>
+                <div class="input-container" style="max-width: 600px; width: 100%;">
+                    <input
+                        type="text"
+                        class="input-field"
+                        id="welcomeInput"
+                        placeholder="Describe your project... (e.g., 'Build a todo app with dark mode')"
+                        onkeypress="handleWelcomeEnter(event)"
+                    >
+                    <button class="send-btn" onclick="startFirstProject()">Start Building 🚀</button>
+                </div>
+            </div>
+
+            <!-- Chat Interface -->
+            <div class="chat-container" id="chatContainer">
+                <div class="messages-area" id="messagesArea">
+                    <!-- Messages will be added here -->
+                </div>
+
+                <div class="thinking" id="thinkingIndicator">
+                    <div class="message-avatar">🤖</div>
+                    <div>💭 SuperAgent is thinking</div>
+                    <div class="thinking-dots">
+                        <div class="thinking-dot"></div>
+                        <div class="thinking-dot"></div>
+                        <div class="thinking-dot"></div>
+                    </div>
+                </div>
+
+                <div class="project-output" id="projectOutput">
+                    <div class="output-header">
+                        📦 Generated Code
+                        <button class="btn btn-secondary" style="margin-left: auto; padding: 6px 12px; font-size: 0.85em;" onclick="downloadCode()">Download</button>
+                    </div>
+                    <div class="output-content" id="outputContent"></div>
+                </div>
+
+                <div class="input-area">
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            class="input-field"
+                            id="chatInput"
+                            placeholder="Describe what you want to build or modify..."
+                            onkeypress="handleChatEnter(event)"
+                        >
+                        <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Updated Pricing Modal Section - Replace lines 589-617 in your index.html -->
+
+<!-- Pricing Modal -->
+<div class="modal" id="pricingModal">
+    <div class="modal-content" style="max-width: 800px;">
+        <div class="modal-header">Choose Your Plan</div>
+
+        <!-- Billing Toggle -->
+        <div style="text-align: center; margin-bottom: 24px;">
+            <div style="display: inline-flex; background: #f3f4f6; padding: 4px; border-radius: 8px;">
+                <button class="billing-toggle active" id="monthlyBtn" onclick="toggleBilling('monthly')" style="padding: 8px 24px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; background: white; color: #667eea;">
+                    Monthly
+                </button>
+                <button class="billing-toggle" id="annualBtn" onclick="toggleBilling('annual')" style="padding: 8px 24px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; background: transparent; color: #6b7280;">
+                    Annual
+                    <span style="background: #10b981; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; margin-left: 4px;">Save 20%</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- FREE PLAN -->
+        <div class="plan-card" onclick="selectPlan('free')" style="border: 2px solid #10b981;">
+            <div class="plan-name">🎁 Free Plan</div>
+            <div class="plan-price">$0</div>
+            <div class="plan-credits">200 credits to get started</div>
+            <div style="margin-top: 8px; color: #10b981; font-size: 0.9em;">✨ Perfect for trying out SuperAgent</div>
+        </div>
+
+        <!-- TIER 1 -->
+<!-- Credit Top-Up Add-on System -->
+<!-- Add this modal AFTER the pricing modal in your HTML -->
+
+<!-- Top-Up Credits Modal -->
+<div class="modal" id="topUpModal">
+    <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header">
+            <span style="font-size: 1.2em;">⚡</span> Add More Credits
+        </div>
+
+        <div style="background: #fef3c7; padding: 16px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #f59e0b;">
+            <div style="font-weight: 600; color: #92400e; margin-bottom: 4px;">
+                Credits Running Low!
+            </div>
+            <div style="color: #92400e; font-size: 0.9em;">
+                You have <span id="remainingCreditsDisplay" style="font-weight: 700;">0</span> credits left
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <h3 style="margin-bottom: 12px; font-size: 1em; color: #1f2937;">Quick Add-Ons</h3>
+
+            <!-- 200 Credits -->
+            <div class="topup-card" onclick="selectTopUp(200, 20)">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div class="topup-credits">+200 Credits</div>
+                        <div style="font-size: 0.85em; color: #6b7280;">Perfect for small projects</div>
+                    </div>
+                    <div class="topup-price">$20</div>
+                </div>
+            </div>
+
+            <!-- 500 Credits -->
+            <div class="topup-card popular" onclick="selectTopUp(500, 45)">
+                <div style="position: absolute; top: -8px; right: 12px; background: #10b981; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.75em; font-weight: 600;">
+                    POPULAR
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div class="topup-credits">+500 Credits</div>
+                        <div style="font-size: 0.85em; color: #6b7280;">Save $5 (10% off)</div>
+                    </div>
+                    <div class="topup-price">$45</div>
+                </div>
+            </div>
+
+            <!-- 1000 Credits -->
+            <div class="topup-card" onclick="selectTopUp(1000, 80)">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div class="topup-credits">+1,000 Credits</div>
+                        <div style="font-size: 0.85em; color: #10b981; font-weight: 600;">Save $20 (20% off)</div>
+                    </div>
+                    <div class="topup-price">$80</div>
+                </div>
+            </div>
+
+            <!-- 2000 Credits -->
+            <div class="topup-card best-value" onclick="selectTopUp(2000, 140)">
+                <div style="position: absolute; top: -8px; right: 12px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.75em; font-weight: 600;">
+                    BEST VALUE
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div class="topup-credits">+2,000 Credits</div>
+                        <div style="font-size: 0.85em; color: #10b981; font-weight: 600;">Save $60 (30% off)</div>
+                    </div>
+                    <div class="topup-price">$140</div>
+                </div>
+            </div>
+
+            <!-- Custom Amount -->
+<!-- Business Plans Section - Add this after the Custom Plan card in pricing modal -->
+
+<!-- BUSINESS PLANS -->
+<div style="margin-top: 32px; padding-top: 24px; border-top: 2px solid #e5e7eb;">
+    <h3 style="margin-bottom: 16px; font-size: 1.1em; color: #1f2937; display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.3em;">🏢</span> Business Plans
+        <span style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.7em; font-weight: 600;">ENTERPRISE</span>
+    </h3>
+
+    <div class="plan-card" style="border: 2px solid #667eea; background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));">
+        <div class="plan-name" style="display: flex; align-items: center; gap: 8px;">
+            💼 Custom Business Plan
+        </div>
+
+        <div style="margin: 16px 0;">
+            <label style="display: block; font-weight: 600; color: #1f2937; margin-bottom: 8px; font-size: 0.95em;">
+                Select Credit Package:
+            </label>
+            <select id="businessPlanSelect" onchange="updateBusinessPlan()" style="width: 100%; padding: 12px 16px; border: 2px solid #667eea; border-radius: 8px; font-size: 1em; font-weight: 600; color: #1f2937; background: white; cursor: pointer;">
+                <option value="5000-500">5,000 Credits - $500/month</option>
+                <option value="10000-950">10,000 Credits - $950/month (Save $50)</option>
+                <option value="15000-1350">15,000 Credits - $1,350/month (Save $150)</option>
+                <option value="20000-1700">20,000 Credits - $1,700/month (Save $300)</option>
+                <option value="30000-2400">30,000 Credits - $2,400/month (Save $600)</option>
+                <option value="50000-3750">50,000 Credits - $3,750/month (Save $1,250)</option>
+                <option value="75000-5250">75,000 Credits - $5,250/month (Save $2,250)</option>
+                <option value="100000-6500">100,000 Credits - $6,500/month (Save $3,500)</option>
+                <option value="custom">🎨 Custom Amount (Contact Sales)</option>
+            </select>
+        </div>
+
+        <div id="businessPlanDetails" style="background: white; padding: 16px; border-radius: 8px; margin-top: 16px; border-left: 4px solid #667eea;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                <div>
+                    <div style="font-size: 0.85em; color: #6b7280; margin-bottom: 4px;">Monthly Credits</div>
+                    <div style="font-size: 1.3em; font-weight: 700; color: #667eea;" id="businessCredits">5,000</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.85em; color: #6b7280; margin-bottom: 4px;">Monthly Price</div>
+                    <div style="font-size: 1.3em; font-weight: 700; color: #667eea;" id="businessPrice">$500</div>
+                </div>
+            </div>
+
+            <div id="businessSavings" style="background: #d1fae5; color: #065f46; padding: 8px 12px; border-radius: 6px; font-size: 0.9em; font-weight: 600; display: none;">
+                💰 You save <span id="businessSavingsAmount">$0</span> per month!
+            </div>
+
+            <div id="businessAnnual" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: 0.85em; color: #6b7280;">Annual (20% off)</div>
+                        <div style="font-size: 1.1em; font-weight: 700; color: #10b981;" id="businessAnnualPrice">$4,800/year</div>
+                    </div>
+                    <div style="background: #10b981; color: white; padding: 6px 12px; border-radius: 6px; font-size: 0.85em; font-weight: 600;">
+                        Save $1,200/year
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 16px; background: #f3f4ff; padding: 12px; border-radius: 8px;">
+            <div style="font-weight: 600; color: #667eea; margin-bottom: 8px;">✨ Business Plan Includes:</div>
+            <ul style="margin: 0; padding-left: 20px; color: #6b7280; font-size: 0.9em; line-height: 1.8;">
+                <li>Priority support (4-hour response time)</li>
+                <li>Dedicated account manager</li>
+                <li>Custom integrations available</li>
+                <li>Advanced analytics dashboard</li>
+                <li>Team collaboration tools</li>
+                <li>SLA guarantee (99.9% uptime)</li>
+                <li>Volume discounts on additional credits</li>
+            </ul>
+        </div>
+
+        <button class="btn btn-primary" onclick="selectBusinessPlan()" style="width: 100%; margin-top: 16px; padding: 14px; font-size: 1.05em;">
+            Get Started with Business Plan
+        </button>
+    </div>
+</div>
+
+<script>
+// Business plan data
+const businessPlans = {
+    '5000-500': { credits: 5000, price: 500, savings: 0 },
+    '10000-950': { credits: 10000, price: 950, savings: 50 },
+    '15000-1350': { credits: 15000, price: 1350, savings: 150 },
+    '20000-1700': { credits: 20000, price: 1700, savings: 300 },
+    '30000-2400': { credits: 30000, price: 2400, savings: 600 },
+    '50000-3750': { credits: 50000, price: 3750, savings: 1250 },
+    '75000-5250': { credits: 75000, price: 5250, savings: 2250 },
+    '100000-6500': { credits: 100000, price: 6500, savings: 3500 }
+};
+
+function updateBusinessPlan() {
+    const select = document.getElementById('businessPlanSelect');
+    const value = select.value;
+
+    if (value === 'custom') {
+        // Hide details, show contact message
+        document.getElementById('businessPlanDetails').innerHTML = `
+            <div style="text-align: center; padding: 24px;">
+                <div style="font-size: 2em; margin-bottom: 12px;">📞</div>
+                <div style="font-weight: 700; color: #1f2937; font-size: 1.1em; margin-bottom: 8px;">
+                    Let's Build Your Perfect Plan
+                </div>
+                <div style="color: #6b7280; margin-bottom: 16px;">
+                    Need more than 100,000 credits or special requirements?<br>
+                    Our team will create a custom package just for you.
+                </div>
+                <div style="color: #667eea; font-weight: 600;">
+                    📧 sales@superagent.ai<br>
+                    📞 1-800-SUPER-AI
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    const plan = businessPlans[value];
+
+    // Update credits display
+    document.getElementById('businessCredits').textContent = plan.credits.toLocaleString();
+
+    // Update price display
+    document.getElementById('businessPrice').textContent = '$' + plan.price.toLocaleString();
+
+    // Show/hide savings
+    const savingsDiv = document.getElementById('businessSavings');
+    if (plan.savings > 0) {
+        savingsDiv.style.display = 'block';
+        document.getElementById('businessSavingsAmount').textContent = '$' + plan.savings.toLocaleString();
+    } else {
+        savingsDiv.style.display = 'none';
+    }
+
+    // Calculate annual price (20% off)
+    const annualMonthly = plan.price * 0.8;
+    const annualTotal = annualMonthly * 12;
+    const annualSavings = (plan.price * 12) - annualTotal;
+
+    document.getElementById('businessAnnualPrice').textContent = '$' + Math.round(annualTotal).toLocaleString() + '/year';
+
+    // Update annual savings badge
+    const annualDiv = document.getElementById('businessAnnual');
+    annualDiv.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <div style="font-size: 0.85em; color: #6b7280;">Annual (20% off)</div>
+                <div style="font-size: 1.1em; font-weight: 700; color: #10b981;">
+                    $${Math.round(annualTotal).toLocaleString()}/year
+                    <span style="font-size: 0.75em; color: #6b7280;">($${Math.round(annualMonthly).toLocaleString()}/month)</span>
+                </div>
+            </div>
+            <div style="background: #10b981; color: white; padding: 6px 12px; border-radius: 6px; font-size: 0.85em; font-weight: 600;">
+                Save $${Math.round(annualSavings).toLocaleString()}/year
+            </div>
+        </div>
+    `;
+
+    // Rebuild the details HTML
+    document.getElementById('businessPlanDetails').innerHTML = `
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+            <div>
+                <div style="font-size: 0.85em; color: #6b7280; margin-bottom: 4px;">Monthly Credits</div>
+                <div style="font-size: 1.3em; font-weight: 700; color: #667eea;">${plan.credits.toLocaleString()}</div>
+            </div>
+            <div>
+                <div style="font-size: 0.85em; color: #6b7280; margin-bottom: 4px;">Monthly Price</div>
+                <div style="font-size: 1.3em; font-weight: 700; color: #667eea;">$${plan.price.toLocaleString()}</div>
+            </div>
+        </div>
+
+        ${plan.savings > 0 ? `
+            <div style="background: #d1fae5; color: #065f46; padding: 8px 12px; border-radius: 6px; font-size: 0.9em; font-weight: 600;">
+                💰 You save $${plan.savings.toLocaleString()} per month compared to standard rate!
+            </div>
+        ` : ''}
+
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div style="font-size: 0.85em; color: #6b7280;">Annual (20% off)</div>
+                    <div style="font-size: 1.1em; font-weight: 700; color: #10b981;">
+                        $${Math.round(annualTotal).toLocaleString()}/year
+                        <span style="font-size: 0.75em; color: #6b7280;">($${Math.round(annualMonthly).toLocaleString()}/month)</span>
+                    </div>
+                </div>
+                <div style="background: #10b981; color: white; padding: 6px 12px; border-radius: 6px; font-size: 0.85em; font-weight: 600;">
+                    Save $${Math.round(annualSavings).toLocaleString()}/year
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function selectBusinessPlan() {
+    const select = document.getElementById('businessPlanSelect');
+    const value = select.value;
+
+    if (value === 'custom') {
+        alert('Custom Business Plan\n\nOur sales team will contact you within 24 hours to discuss your requirements.\n\nEmail: sales@superagent.ai\nPhone: 1-800-SUPER-AI');
+        return;
+    }
+
+    const plan = businessPlans[value];
+    const annualPrice = Math.round(plan.price * 0.8 * 12);
+
+    alert(
+        `Business Plan Selected!\n\n` +
+        `📊 ${plan.credits.toLocaleString()} credits/month\n` +
+        `💰 $${plan.price}/month or $${annualPrice}/year\n\n` +
+        `Our team will contact you to:\n` +
+        `✅ Set up your dedicated account\n` +
+        `✅ Assign your account manager\n` +
+        `✅ Configure custom integrations\n` +
+        `✅ Provide onboarding training\n\n` +
+        `Contact: sales@superagent.ai`
+    );
+
+    closePricing();
+}
+
+// Initialize business plan on modal open
+function showPricing() {
+    document.getElementById('pricingModal').classList.add('active');
+    // Initialize business plan if not already done
+    if (document.getElementById('businessPlanSelect')) {
+        updateBusinessPlan();
+    }
+}
+</script>
+            <div class="topup-card custom" onclick="customTopUp()">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div class="topup-credits">🎨 Custom Amount</div>
+                        <div style="font-size: 0.85em; color: #6b7280;">Choose exactly what you need</div>
+                    </div>
+                    <div style="font-size: 1.5em;">→</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: #f3f4ff; padding: 12px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-size: 0.9em; color: #667eea;">
+            💡 <strong>Tip:</strong> Credits never expire and roll over month to month!
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closeTopUp()">Maybe Later</button>
+            <button class="btn btn-primary" onclick="purchaseTopUp()">Add Credits</button>
+        </div>
+    </div>
+</div>
+
+<style>
+.topup-card {
+    position: relative;
+    padding: 20px;
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.topup-card:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.topup-card.selected {
+    border-color: #667eea;
+    background: #f3f4ff;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.topup-card.popular {
+    border-color: #10b981;
+}
+
+.topup-card.best-value {
+    border-color: #667eea;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+}
+
+.topup-card.custom {
+    border: 2px dashed #667eea;
+}
+
+.topup-credits {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.topup-price {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #667eea;
+}
+</style>
+
+<script>
+// Top-up state
+let selectedTopUpCredits = null;
+let selectedTopUpPrice = null;
+
+// Show top-up modal when credits are low
+function checkAndShowTopUp() {
+    if (credits <= 0) {
+        showTopUpModal('You\'re out of credits!');
+    } else if (credits <= 20) {
+        showTopUpModal('Credits running low!');
+    }
+}
+
+function showTopUpModal(message) {
+    document.getElementById('remainingCreditsDisplay').textContent = credits;
+    document.getElementById('topUpModal').classList.add('active');
+}
+
+function closeTopUp() {
+    document.getElementById('topUpModal').classList.remove('active');
+    selectedTopUpCredits = null;
+    selectedTopUpPrice = null;
+
+    // Remove all selected classes
+    document.querySelectorAll('.topup-card').forEach(card => {
+        card.classList.remove('selected');
+    });
+}
+
+function selectTopUp(creditsAmount, price) {
+    selectedTopUpCredits = creditsAmount;
+    selectedTopUpPrice = price;
+
+    // Remove all selected classes
+    document.querySelectorAll('.topup-card').forEach(card => {
+        card.classList.remove('selected');
+    });
+
+    // Add selected class to clicked card
+    event.target.closest('.topup-card').classList.add('selected');
+}
+
+function customTopUp() {
+    const customCredits = prompt('How many credits would you like to add?\n\nEnter a number (minimum 100):');
+
+    if (!customCredits || isNaN(customCredits)) {
+        return;
+    }
+
+    const creditsNum = parseInt(customCredits);
+
+    if (creditsNum < 100) {
+        alert('Minimum is 100 credits. Please enter a larger amount.');
+        return;
+    }
+
+    // Calculate price: $0.10 per credit
+    const price = (creditsNum * 0.10).toFixed(2);
+
+    const confirm = window.confirm(
+        `Custom Credit Package\n\n` +
+        `Credits: ${creditsNum.toLocaleString()}\n` +
+        `Price: $${price}\n` +
+        `Rate: $0.10 per credit\n\n` +
+        `Proceed with this purchase?`
+    );
+
+    if (confirm) {
+        selectedTopUpCredits = creditsNum;
+        selectedTopUpPrice = parseFloat(price);
+        purchaseTopUp();
+    }
+}
+
+function purchaseTopUp() {
+    if (!selectedTopUpCredits || !selectedTopUpPrice) {
+        alert('Please select a credit package first!');
+        return;
+    }
+
+    // In production, this would integrate with Stripe/PayPal
+    alert(
+        `Payment Integration Coming Soon!\n\n` +
+        `Package: ${selectedTopUpCredits.toLocaleString()} credits\n` +
+        `Price: $${selectedTopUpPrice}\n\n` +
+        `For now, we'll add the credits to your account!`
+    );
+
+    // Add credits
+    credits += selectedTopUpCredits;
+    updateCreditsDisplay();
+
+    // Show success message
+    setTimeout(() => {
+        alert(`✅ Success!\n\n+${selectedTopUpCredits.toLocaleString()} credits added to your account!\n\nNew balance: ${credits} credits`);
+    }, 100);
+
+    closeTopUp();
+}
+
+// Modified sendMessage function to check credits BEFORE and AFTER
+function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+
+    if (!message) return;
+
+    // Check if user has enough credits
+    if (credits < 10) {
+        showTopUpModal('Not enough credits!');
+        return;
+    }
+
+    // Add user message
+    addMessage('user', message);
+    input.value = '';
+
+    // Deduct credits
+    credits -= 10;
+    updateCreditsDisplay();
+
+    // Check if credits are low after deduction
+    if (credits <= 20 && credits > 0) {
+        setTimeout(() => {
+            if (confirm('You have ' + credits + ' credits remaining. Would you like to add more credits now?')) {
+                showTopUpModal('Add more credits to continue');
+            }
+        }, 500);
+    } else if (credits <= 0) {
+        setTimeout(() => {
+            showTopUpModal('You\'re out of credits!');
+        }, 500);
+    }
+
+    // Show thinking
+    document.getElementById('thinkingIndicator').classList.add('active');
+    document.getElementById('sendBtn').disabled = true;
+
+    // Simulate AI response
+    setTimeout(() => {
+        processUserRequest(message);
+    }, 2000);
+}
+</script>
+        <div class="plan-card" onclick="selectPlan('tier1')">
+            <div class="plan-name">🚀 Tier 1</div>
+            <div class="plan-price">
+                <span id="tier1Price">$100</span><span class="price-period">/month</span>
+            </div>
+            <div class="plan-credits">500 credits/month</div>
+            <div class="annual-savings" id="tier1Savings" style="display: none; margin-top: 8px; color: #10b981; font-size: 0.85em;">
+                💰 Save $240/year
+            </div>
+        </div>
+
+        <!-- TIER 2 -->
+        <div class="plan-card" onclick="selectPlan('tier2')">
+            <div class="plan-name">⭐ Tier 2</div>
+            <div class="plan-price">
+                <span id="tier2Price">$200</span><span class="price-period">/month</span>
+            </div>
+            <div class="plan-credits">1,200 credits/month</div>
+            <div class="annual-savings" id="tier2Savings" style="display: none; margin-top: 8px; color: #10b981; font-size: 0.85em;">
+                💰 Save $480/year
+            </div>
+        </div>
+
+        <!-- TIER 3 -->
+        <div class="plan-card" onclick="selectPlan('tier3')">
+            <div class="plan-name">💎 Tier 3</div>
+            <div class="plan-price">
+                <span id="tier3Price">$300</span><span class="price-period">/month</span>
+            </div>
+            <div class="plan-credits">2,000 credits/month</div>
+            <div class="annual-savings" id="tier3Savings" style="display: none; margin-top: 8px; color: #10b981; font-size: 0.85em;">
+                💰 Save $720/year
+            </div>
+        </div>
+
+        <!-- CUSTOM PLAN -->
+        <div class="plan-card" onclick="selectPlan('custom')" style="border: 2px dashed #667eea;">
+            <div class="plan-name">🎨 Custom Plan</div>
+            <div class="plan-price">Build Your Own</div>
+            <div class="plan-credits">Choose your exact credit amount</div>
+            <div style="margin-top: 8px; color: #667eea; font-size: 0.9em;">✨ Perfect for specific needs</div>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closePricing()">Cancel</button>
+            <button class="btn btn-primary" onclick="upgradePlan()">Continue</button>
+        </div>
+    </div>
+</div>
+
+<style>
+.billing-toggle.active {
+    background: white !important;
+    color: #667eea !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.price-period {
+    font-size: 0.6em;
+    color: #6b7280;
+}
+</style>
+
+<script>
+// Pricing state
+let currentBilling = 'monthly';
+
+// Pricing data
+const pricingData = {
+    monthly: {
+        tier1: { price: 100, total: 100, credits: 500 },
+        tier2: { price: 200, total: 200, credits: 1200 },
+        tier3: { price: 300, total: 300, credits: 2000 }
+    },
+    annual: {
+        tier1: { price: 80, total: 960, credits: 500, savings: 240 },
+        tier2: { price: 160, total: 1920, credits: 1200, savings: 480 },
+        tier3: { price: 240, total: 2880, credits: 2000, savings: 720 }
+    }
+};
+
+function toggleBilling(type) {
+    currentBilling = type;
+
+    // Update button styles
+    document.getElementById('monthlyBtn').classList.toggle('active', type === 'monthly');
+    document.getElementById('annualBtn').classList.toggle('active', type === 'annual');
+
+    // Update prices
+    const data = pricingData[type];
+
+    // Tier 1
+    document.getElementById('tier1Price').textContent = '$' + data.tier1.price;
+    document.getElementById('tier1Savings').style.display = type === 'annual' ? 'block' : 'none';
+
+    // Tier 2
+    document.getElementById('tier2Price').textContent = '$' + data.tier2.price;
+    document.getElementById('tier2Savings').style.display = type === 'annual' ? 'block' : 'none';
+
+    // Tier 3
+    document.getElementById('tier3Price').textContent = '$' + data.tier3.price;
+    document.getElementById('tier3Savings').style.display = type === 'annual' ? 'block' : 'none';
+}
+
+function upgradePlan() {
+    if (!selectedPlan) {
+        alert('Please select a plan first!');
+        return;
+    }
+
+    if (selectedPlan === 'free') {
+        alert('Welcome to the Free Plan! You now have 200 credits to get started!');
+        credits = 200;
+        updateCreditsDisplay();
+        closePricing();
+        return;
+    }
+
+    if (selectedPlan === 'custom') {
+        alert('Custom Plan Setup\n\nPlease contact our team to build your perfect credit package!\n\nEmail: sales@superagent.ai');
+        closePricing();
+        return;
+    }
+
+    const planData = pricingData[currentBilling][selectedPlan];
+    const billingText = currentBilling === 'annual' ? `$${planData.total}/year (billed annually)` : `$${planData.price}/month`;
+
+    alert(`Payment integration coming soon!\n\nYou selected: ${selectedPlan.toUpperCase()}\nBilling: ${billingText}\nCredits: ${planData.credits}/month\n\nFor now, enjoy 200 bonus credits!`);
+
+    credits += 200;
+    updateCreditsDisplay();
+    closePricing();
+}
+</script>
+
+    <script>
+        // State Management
+        let credits = 100;
+        let currentProject = null;
+        let projects = [];
+        let selectedPlan = null;
+        let currentCode = '';
+
+        // Initialize
+        loadProjects();
+        updateCreditsDisplay();
+
+        // Welcome Screen Functions
+        function handleWelcomeEnter(event) {
+            if (event.key === 'Enter') {
+                startFirstProject();
+            }
+        }
+
+        function startFirstProject() {
+            const input = document.getElementById('welcomeInput');
+            const description = input.value.trim();
+
+            if (!description) {
+                alert('Please describe your project first!');
+                return;
+            }
+
+            startNewProject(description);
+        }
+
+        // Chat Functions
+        function handleChatEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function startNewProject(initialMessage = '') {
+            // Hide welcome, show chat
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('chatContainer').classList.add('active');
+
+            // Clear messages
+            document.getElementById('messagesArea').innerHTML = '';
+            document.getElementById('projectOutput').classList.remove('active');
+
+            // Create new project
+            currentProject = {
+                id: Date.now(),
+                title: initialMessage || 'New Project',
+                messages: [],
+                createdAt: new Date().toISOString()
+            };
+
+            // Send initial message if provided
+            if (initialMessage) {
+                document.getElementById('chatInput').value = initialMessage;
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // Check credits
+            if (credits < 10) {
+                alert('Low credits! Please upgrade your plan or purchase more credits.');
+                showPricing();
+                return;
+            }
+
+            // Add user message
+            addMessage('user', message);
+            input.value = '';
+
+            // Deduct credits
+            credits -= 10;
+            updateCreditsDisplay();
+
+            // Show thinking
+            document.getElementById('thinkingIndicator').classList.add('active');
+            document.getElementById('sendBtn').disabled = true;
+
+            // Simulate AI response
+            setTimeout(() => {
+                processUserRequest(message);
+            }, 2000);
+        }
+
+        function processUserRequest(userMessage) {
+            // Hide thinking
+            document.getElementById('thinkingIndicator').classList.remove('active');
+            document.getElementById('sendBtn').disabled = false;
+
+            // Generate response based on user input
+            let response = '';
+            let code = '';
+
+            // Simple keyword detection for demo purposes
+            const lowerMessage = userMessage.toLowerCase();
+
+            if (lowerMessage.includes('todo') || lowerMessage.includes('task')) {
+                response = "I'll create a beautiful todo app for you with add, delete, and mark complete features!";
+                code = generateTodoAppCode(lowerMessage.includes('dark'));
+            } else if (lowerMessage.includes('landing') || lowerMessage.includes('website')) {
+                response = "I'll build a modern landing page with hero section, features, and contact form!";
+                code = generateLandingPageCode();
+            } else if (lowerMessage.includes('calculator')) {
+                response = "I'll create a functional calculator with a clean interface!";
+                code = generateCalculatorCode();
+            } else if (lowerMessage.includes('dashboard')) {
+                response = "I'll build an admin dashboard with charts and data tables!";
+                code = generateDashboardCode();
+            } else {
+                response = `I understand you want to build: "${userMessage}". I'll create a custom solution for you with HTML, CSS, and JavaScript. Here's what I'm building:
+
+✅ Clean, modern interface
+✅ Responsive design
+✅ Fully functional features
+✅ Production-ready code
+
+Your project is ready!`;
+                code = generateGenericCode(userMessage);
+            }
+
+            // Add assistant message
+            addMessage('assistant', response);
+
+            // Show code output
+            currentCode = code;
+            document.getElementById('outputContent').textContent = code;
+            document.getElementById('projectOutput').classList.add('active');
+
+            // Save project
+            saveProject();
+        }
+
+        function addMessage(role, content) {
+            const messagesArea = document.getElementById('messagesArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.textContent = role === 'user' ? '👤' : '🤖';
+
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.textContent = content;
+
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(messageContent);
+            messagesArea.appendChild(messageDiv);
+
+            // Scroll to bottom
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+
+            // Save to project
+            if (currentProject) {
+                currentProject.messages.push({ role, content, timestamp: Date.now() });
+            }
+        }
+
+        // Code Generation Functions
+        function generateTodoAppCode(darkMode) {
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            ${darkMode ? 'background: #1a1a1a; color: #fff;' : 'background: #f5f5f5; color: #333;'}
+            padding: 40px 20px;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        h1 { margin-bottom: 30px; text-align: center; }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid ${darkMode ? '#333' : '#ddd'};
+            border-radius: 8px;
+            font-size: 16px;
+            ${darkMode ? 'background: #2a2a2a; color: #fff;' : ''}
+        }
+        button {
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        button:hover { background: #5568d3; }
+        .todo-item {
+            padding: 16px;
+            ${darkMode ? 'background: #2a2a2a;' : 'background: white;'}
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .todo-item.completed { opacity: 0.6; text-decoration: line-through; }
+        .delete-btn {
+            margin-left: auto;
+            padding: 6px 12px;
+            background: #ef4444;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✅ My Todo App</h1>
+        <div class="input-group">
+            <input type="text" id="todoInput" placeholder="What needs to be done?">
+            <button onclick="addTodo()">Add</button>
+        </div>
+        <div id="todoList"></div>
+    </div>
+
+    <script>
+        let todos = [];
+
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            if (input.value.trim()) {
+                todos.push({ id: Date.now(), text: input.value, completed: false });
+                input.value = '';
+                renderTodos();
+            }
+        }
+
+        function toggleTodo(id) {
+            todos = todos.map(todo =>
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            );
+            renderTodos();
+        }
+
+        function deleteTodo(id) {
+            todos = todos.filter(todo => todo.id !== id);
+            renderTodos();
+        }
+
+        function renderTodos() {
+            const list = document.getElementById('todoList');
+            list.innerHTML = todos.map(todo => \`
+                <div class="todo-item \${todo.completed ? 'completed' : ''}">
+                    <input type="checkbox" \${todo.completed ? 'checked' : ''}
+                           onchange="toggleTodo(\${todo.id})">
+                    <span>\${todo.text}</span>
+                    <button class="delete-btn" onclick="deleteTodo(\${todo.id})">Delete</button>
+                </div>
+            \`).join('');
+        }
+
+        document.getElementById('todoInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addTodo();
+        });
+    </script>
+</body>
+</html>`;
+        }
+
+        function generateLandingPageCode() {
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Landing Page</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .hero h1 { font-size: 3em; margin-bottom: 20px; }
+        .hero p { font-size: 1.2em; margin-bottom: 30px; }
+        .cta-btn {
+            padding: 16px 32px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .features {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .feature {
+            text-align: center;
+            padding: 30px;
+        }
+        .feature h3 { margin: 20px 0 10px; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Welcome to Your Product</h1>
+        <p>Build amazing things with our platform</p>
+        <button class="cta-btn">Get Started Free</button>
+    </div>
+    <div class="features">
+        <div class="feature">
+            <div style="font-size: 3em;">⚡</div>
+            <h3>Fast</h3>
+            <p>Lightning fast performance</p>
+        </div>
+        <div class="feature">
+            <div style="font-size: 3em;">🔒</div>
+            <h3>Secure</h3>
+            <p>Bank-level security</p>
+        </div>
+        <div class="feature">
+            <div style="font-size: 3em;">🎨</div>
+            <h3>Beautiful</h3>
+            <p>Stunning design out of the box</p>
+        </div>
+    </div>
+</body>
+</html>`;
+        }
+
+        function generateCalculatorCode() {
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        .calculator {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .display {
+            background: #1f2937;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: right;
+            font-size: 2em;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            padding: 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #f3f4f6;
+            transition: all 0.2s;
+        }
+        button:hover { background: #e5e7eb; }
+        button.operator { background: #667eea; color: white; }
+        button.equals { background: #10b981; color: white; grid-column: span 2; }
+        button.clear { background: #ef4444; color: white; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button onclick="deleteLast()">←</button>
+            <button class="operator" onclick="appendOperator('/')">÷</button>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button class="operator" onclick="appendOperator('*')">×</button>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button class="operator" onclick="appendOperator('-')">−</button>
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button class="operator" onclick="appendOperator('+')">+</button>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="appendNumber('.')">.</button>
+            <button class="equals" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let currentValue = '0';
+
+        function updateDisplay() {
+            document.getElementById('display').textContent = currentValue;
+        }
+
+        function appendNumber(num) {
+            if (currentValue === '0') currentValue = num;
+            else currentValue += num;
+            updateDisplay();
+        }
+
+        function appendOperator(op) {
+            currentValue += ' ' + op + ' ';
+            updateDisplay();
+        }
+
+        function clearDisplay() {
+            currentValue = '0';
+            updateDisplay();
+        }
+
+        function deleteLast() {
+            currentValue = currentValue.slice(0, -1) || '0';
+            updateDisplay();
+        }
+
+        function calculate() {
+            try {
+                currentValue = String(eval(currentValue));
+                updateDisplay();
+            } catch (e) {
+                currentValue = 'Error';
+                updateDisplay();
+            }
+        }
+    </script>
+</body>
+</html>`;
+        }
+
+        function generateDashboardCode() {
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+        }
+        .header {
+            background: white;
+            padding: 20px 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header h1 { color: #1f2937; }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+        .table-container {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Admin Dashboard</h1>
+    </div>
+    <div class="container">
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-label">Total Users</div>
+                <div class="stat-value">1,234</div>
+                <div style="color: #10b981;">↑ 12% from last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Revenue</div>
+                <div class="stat-value">$45.2K</div>
+                <div style="color: #10b981;">↑ 8% from last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Active Projects</div>
+                <div class="stat-value">89</div>
+                <div style="color: #ef4444;">↓ 3% from last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Conversion Rate</div>
+                <div class="stat-value">3.2%</div>
+                <div style="color: #10b981;">↑ 0.5% from last month</div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <h2 style="margin-bottom: 20px;">Recent Activity</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Action</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>Created new project</td>
+                        <td>2 hours ago</td>
+                        <td><span style="color: #10b981;">✓ Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td>Jane Smith</td>
+                        <td>Upgraded to Pro</td>
+                        <td>5 hours ago</td>
+                        <td><span style="color: #10b981;">✓ Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td>Bob Johnson</td>
+                        <td>Deployed website</td>
+                        <td>1 day ago</td>
+                        <td><span style="color: #10b981;">✓ Complete</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>`;
+        }
+
+        function generateGenericCode(description) {
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${description}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 100%;
+        }
+        h1 {
+            color: #1f2937;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>${description}</h1>
+        <p>
+            This is your custom-built project created by SuperAgent AI.
+            The application is ready to use and fully functional.
+        </p>
+        <p>
+            <strong>Features included:</strong><br>
+            ✅ Modern, responsive design<br>
+            ✅ Clean, semantic HTML<br>
+            ✅ Beautiful CSS styling<br>
+            ✅ Interactive JavaScript<br>
+            ✅ Production-ready code
+        </p>
+        <button onclick="alert('Your project is working perfectly!')">Test Functionality</button>
+    </div>
+
+    <script>
+        console.log('${description} - Built by SuperAgent AI');
+        console.log('Ready to customize and deploy!');
+    </script>
+</body>
+</html>`;
+        }
+
+        // Project Management
+        function saveProject() {
+            if (!currentProject) return;
+
+            // Update title from first message
+            if (currentProject.messages.length > 0) {
+                const firstUserMessage = currentProject.messages.find(m => m.role === 'user');
+                if (firstUserMessage) {
+                    currentProject.title = firstUserMessage.content.substring(0, 50);
+                }
+            }
+
+            // Save to projects array
+            const existingIndex = projects.findIndex(p => p.id === currentProject.id);
+            if (existingIndex >= 0) {
+                projects[existingIndex] = currentProject;
+            } else {
+                projects.unshift(currentProject);
+            }
+
+            // Update history list
+            updateHistoryList();
+
+            // Save to localStorage
+            localStorage.setItem('superagent_projects', JSON.stringify(projects));
+        }
+
+        function loadProjects() {
+            const saved = localStorage.getItem('superagent_projects');
+            if (saved) {
+                projects = JSON.parse(saved);
+                updateHistoryList();
+            }
+        }
+
+        function updateHistoryList() {
+            const historyList = document.getElementById('historyList');
+
+            if (projects.length === 0) {
+                historyList.innerHTML = '<div style="color: #6b7280; font-size: 0.9em; padding: 12px;">No projects yet</div>';
+                return;
+            }
+
+            historyList.innerHTML = projects.slice(0, 10).map(project => `
+                <div class="history-item" onclick="loadProject(${project.id})">
+                    <div class="title">${escapeHtml(project.title)}</div>
+                    <div class="date">${formatDate(project.createdAt)}</div>
+                </div>
+            `).join('');
+        }
+
+        function loadProject(id) {
+            const project = projects.find(p => p.id === id);
+            if (!project) return;
+
+            currentProject = project;
+
+            // Show chat interface
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('chatContainer').classList.add('active');
+
+            // Load messages
+            const messagesArea = document.getElementById('messagesArea');
+            messagesArea.innerHTML = '';
+
+            project.messages.forEach(msg => {
+                addMessageToDisplay(msg.role, msg.content);
+            });
+        }
+
+        function addMessageToDisplay(role, content) {
+            const messagesArea = document.getElementById('messagesArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.textContent = role === 'user' ? '👤' : '🤖';
+
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.textContent = content;
+
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(messageContent);
+            messagesArea.appendChild(messageDiv);
+        }
+
+        // Credits Management
+        function updateCreditsDisplay() {
+            const display = document.getElementById('creditsDisplay');
+            document.getElementById('creditsCount').textContent = credits;
+
+            display.classList.remove('healthy', 'warning', 'critical');
+
+            if (credits <= 10) {
+                display.classList.add('critical');
+            } else if (credits <= 50) {
+                display.classList.add('warning');
+            } else {
+                display.classList.add('healthy');
+            }
+
+            localStorage.setItem('superagent_credits', credits);
+        }
+
+        // Pricing Modal
+        function showPricing() {
+            document.getElementById('pricingModal').classList.add('active');
+        }
+
+        function closePricing() {
+            document.getElementById('pricingModal').classList.remove('active');
+        }
+
+        function selectPlan(plan) {
+            selectedPlan = plan;
+
+            // Remove all selected classes
+            document.querySelectorAll('.plan-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            // Add selected class to clicked card
+            event.target.closest('.plan-card').classList.add('selected');
+        }
+
+        function upgradePlan() {
+            if (!selectedPlan) {
+                alert('Please select a plan first!');
+                return;
+            }
+
+            // In production, this would integrate with Stripe/PayPal
+            alert('Payment integration coming soon! For now, enjoy 100 bonus credits!');
+
+            // Add bonus credits
+            credits += 100;
+            updateCreditsDisplay();
+            closePricing();
+        }
+
+        // Account
+        function showAccount() {
+            alert('Account settings coming soon!\n\nCurrent Plan: Starter\nCredits: ' + credits + '\nProjects: ' + projects.length);
+        }
+
+        // Download Code
+        function downloadCode() {
+            if (!currentCode) return;
+
+            const blob = new Blob([currentCode], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = (currentProject?.title || 'project').replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.html';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Utility Functions
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diff = now - date;
+
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+
+            if (minutes < 1) return 'Just now';
+            if (minutes < 60) return `${minutes}m ago`;
+            if (hours < 24) return `${hours}h ago`;
+            if (days < 7) return `${days}d ago`;
+
+            return date.toLocaleDateString();
+        }
+
+        // Load saved credits
+        const savedCredits = localStorage.getItem('superagent_credits');
+        if (savedCredits) {
+            credits = parseInt(savedCredits);
+            updateCreditsDisplay();
+        }
+    </script>
+</body>
+</html>`;
+        }
+</invoke>
